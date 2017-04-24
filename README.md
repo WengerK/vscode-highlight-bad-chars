@@ -15,3 +15,7 @@ Save yourself the burden of debugging invisible bugs for hours!
 ### After
 
 ![After using Highlight Bad Chars](https://raw.githubusercontent.com/WengerK/vscode-highlight-bad-chars/master/images/after.png)
+
+## Credits
+
+Based on the [atom](https://atom.io/) package [Highlight Bad Chars](https://atom.io/packages/highlight-bad-chars).
