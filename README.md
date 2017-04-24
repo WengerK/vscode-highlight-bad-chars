@@ -10,8 +10,8 @@ Save yourself the burden of debugging invisible bugs for hours!
 
 ### Before
 
-![Before using Highlight Bad Chars](https://github.com/WengerK/vscode-highlight-bad-chars/blob/master/images/before.png)
+![Before using Highlight Bad Chars](https://raw.githubusercontent.com/WengerK/vscode-highlight-bad-chars/master/images/before.png)
 
 ### After
 
-![After using Highlight Bad Chars](https://github.com/WengerK/vscode-highlight-bad-chars/blob/master/images/after.png)
+![After using Highlight Bad Chars](https://raw.githubusercontent.com/WengerK/vscode-highlight-bad-chars/master/images/after.png)
