@@ -4,6 +4,11 @@
     "description": "Extension to highlight bad characters such as No-break space ( ) and the Greek question mark (;) in your source files.",
     "version": "0.0.1",
     "publisher": "wengerk",
+    "repository": "https://github.com/WengerK/vscode-highlight-bad-chars",
+    "homepage": "https://github.com/WengerK/vscode-highlight-bad-chars#readme",
+    "bugs": "https://github.com/WengerK/vscode-highlight-bad-chars/issues",
+    "license": "MIT",
+    "icon": "icon.png",
     "engines": {
         "vscode": "^1.11.0"
     },
