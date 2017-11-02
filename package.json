@@ -27,7 +27,7 @@
                 "highlight-bad-chars.additionalUnicodeChars": {
                     "type": "array",
                     "default": [],
-                    "description": "array of additional unicode characters to match. example '\u200E'"
+                    "description": "array of additional unicode characters to match. example '\\u200E'"
                 }
             }
         },
