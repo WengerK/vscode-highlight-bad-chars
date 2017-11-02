@@ -15,15 +15,28 @@
     "categories": [
         "Other"
     ],
-	"activationEvents": [
-		"*"
-	],
+    "activationEvents": [
+        "*"
+    ],
     "main": "./out/src/extension",
     "contributes": {
-        "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
-        }]
+        "configuration": {
+            "type": "object",
+            "title": "highlight-bad-chars configuration",
+            "properties": {
+                "highlight-bad-chars.additionalUnicodeChars": {
+                    "type": "array",
+                    "default": [],
+                    "description": "array of additional unicode characters to match. example '\u200E'"
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "extension.sayHello",
+                "title": "Hello World"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
