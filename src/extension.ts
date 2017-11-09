@@ -81,8 +81,9 @@ export function activate(context: vscode.ExtensionContext) {
         '\u01C0', // latin letter dental click
         '\u2223', // divides
     ];
-    const charRegExp = '[' + chars.join('') + ']';
-
+    
+    let additionalChars = vscode.workspace.getConfiguration('highlight-bad-chars').additionalUnicodeChars;
+    let charRegExp = '[' + chars.join('') + additionalChars.join('') + ']';
     let activeEditor = vscode.window.activeTextEditor;
     if (activeEditor) {
         triggerUpdateDecorations();
