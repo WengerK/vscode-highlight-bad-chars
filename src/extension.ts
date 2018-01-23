@@ -17,6 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     const chars = [
         // https://github.com/possan/sublime_unicode_nbsp/blob/master/sublime_unicode_nbsp.py
+        // Removed typographical characters (e.g., proper fractions)
         '\x82', // High code comma
         '\x84', // High code double comma
         '\x85', // Tripple dot
@@ -33,14 +34,13 @@ export function activate(context: vscode.ExtensionContext) {
         '\xA6', // Split vertical bar
         '\xAB', // Double less than
         '\xBB', // Double greater than
-        '\xBC', // one quarter
-        '\xBD', // one half
         '\xBE', // three quarters
         '\xBF', // c-single quote
         '\xA8', // modifier - under curve
         '\xB1', // modifier - under line
 
         // https://www.cs.tut.fi/~jkorpela/chars/spaces.html
+        // Removed proper typographical punctuation (en dash, em dash)
         // '\u00A0', // no-break space
         '\u1680', // ogham space mark
         '\u180E', // mongolian vowel separator
@@ -57,8 +57,6 @@ export function activate(context: vscode.ExtensionContext) {
         '\u200A', // hair space
         '\u200B', // zero width space
         '\u200D', // zero width joiner
-        '\u2013', // en dash
-        '\u2014', // em dash
         '\u2028', // line separator space
         '\u202F', // narrow no-break space
         '\u205F', // medium mathematical space
