@@ -7,13 +7,8 @@ import * as vscode from 'vscode';
 export function activate(context: vscode.ExtensionContext) {
     console.log('highlight-bad-chars decorator is activated');
 
-    const badCharDecorationType = vscode.window.createTextEditorDecorationType({
-        cursor: 'crosshair',
-        backgroundColor: 'rgba(255,0,0,0.3)',
-        borderWidth: '1px',
-        borderStyle: 'solid',
-        borderColor: 'rgba(255,0,0,0.6)'
-    });
+    const badCharDecorationStyle = vscode.workspace.getConfiguration('highlight-bad-chars').badCharDecorationStyle;
+    const badCharDecorationType = vscode.window.createTextEditorDecorationType(badCharDecorationStyle);
 
     const chars = [
         // https://github.com/possan/sublime_unicode_nbsp/blob/master/sublime_unicode_nbsp.py
