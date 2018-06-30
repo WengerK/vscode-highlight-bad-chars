@@ -29,6 +29,21 @@ Additional unicode characters can be specified in Visual Studio Code 'Settings'.
 ```
 ![highlight-bad-chars-configuration](https://raw.githubusercontent.com/WengerK/vscode-highlight-bad-chars/master/images/highlight-bad-chars-configuration.settings.png)
 
+The default "bad char" decoration style can be configured through the
+`highlight-bad-chars.badCharDecorationStyle` and defaults to:
+
+```
+    "highlight-bad-chars.badCharDecorationStyle": {
+        "cursor": "crosshair",
+        "backgroundColor": "rgba(255,0,0,0.3)",
+        "borderWidth": "1px",
+        "borderStyle": "solid",
+        "borderColor": "rgba(255,0,0,0.6)"
+    }
+```
+
+![highlight-bad-chars-configuration](https://raw.githubusercontent.com/WengerK/vscode-highlight-bad-chars/master/images/highlight-bad-chars-decoration.settings.png)
+
 ## Credits
 
 Based on the [atom](https://atom.io/) package [Highlight Bad Chars](https://atom.io/packages/highlight-bad-chars).
