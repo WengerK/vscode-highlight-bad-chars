@@ -42,13 +42,7 @@
                 }
 
             }
-        },
-        "commands": [
-            {
-                "command": "extension.sayHello",
-                "title": "Hello World"
-            }
-        ]
+        }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
