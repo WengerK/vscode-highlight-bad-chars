@@ -7,11 +7,17 @@ import chars from './bad-characters';
 export function activate(context: vscode.ExtensionContext) {
     console.log('highlight-bad-chars decorator is activated');
 
-    const badCharDecorationStyle = vscode.workspace.getConfiguration('highlight-bad-chars').badCharDecorationStyle;
+    const badCharDecorationStyle = vscode.workspace.getConfiguration('highlight-bad-chars').badCharDecorationStyle as vscode.DecorationRenderOptions;
     const badCharDecorationType = vscode.window.createTextEditorDecorationType(badCharDecorationStyle);
+    const additionalChars = vscode.workspace.getConfiguration('highlight-bad-chars').additionalUnicodeChars as string[];
+    const asciiOnly = vscode.workspace.getConfiguration('highlight-bad-chars').asciiOnly;
 
-    const additionalChars = vscode.workspace.getConfiguration('highlight-bad-chars').additionalUnicodeChars;
-    const charRegExp = '[' + chars.join('') + additionalChars.join('') + ']';
+    const charRegExp = '[' +
+        chars.join('') +
+        (additionalChars || []).join('') +
+        (asciiOnly ? '\u{0080}-\u{10FFFF}' : '') +
+        ']';
+
     let timeout: NodeJS.Timeout|null = null;
     let activeEditor = vscode.window.activeTextEditor;
     if (activeEditor) {
