@@ -60,6 +60,7 @@ export function activate(context: vscode.ExtensionContext) {
         '\u205F', // medium mathematical space
         '\u3000', // ideographic space
         '\uFEFF', // zero width no-break space
+        '\uFFFC', // object replacement character
         '\u00AD', // soft hypen
 
         // others
