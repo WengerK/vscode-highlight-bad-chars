@@ -8,6 +8,7 @@ All notable changes to the "highlight-bad-chars" extension will be documented in
 - [feat] highlight additional characters: control characters, soft hyphen, object replacement character - close #8, #9, #17
 - [feat] show the Unicode codepoint of highlighted characters - close #12
 - [feat] configuration option `asciiOnly` to highlight all non-ASCII characters as "bad" (disabled by default) - close #7
+- [feat] configuration option `allowedUnicodeChars` to mark characters as "non-bad" - close #4, #10
 - [fix] when the configuration changes, the extension changes its behavior without reloading the window
 - [fix] remove redundant "Hello World" Command from Command Palette - close #15
 
@@ -19,7 +20,7 @@ Thanks to @ItalyPaleAle, @quackingduck, @Pablion.
 
 ## 0.0.2 - 2017-11-12
 
-- add settings option to allow additioal unicode characters to be specified example \u200E
+- add settings option to allow additioal unicode characters to be specified example `\u200E`
 
 ## 0.0.1 - 2017-04-24
 
