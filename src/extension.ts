@@ -82,6 +82,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     const additionalChars = vscode.workspace.getConfiguration('highlight-bad-chars').additionalUnicodeChars;
     const charRegExp = '[' + chars.join('') + additionalChars.join('') + ']';
+    let timeout: NodeJS.Timeout|null = null;
     let activeEditor = vscode.window.activeTextEditor;
     if (activeEditor) {
         triggerUpdateDecorations();
@@ -100,7 +101,6 @@ export function activate(context: vscode.ExtensionContext) {
         }
     }, null, context.subscriptions);
 
-    let timeout: NodeJS.Timeout|null = null;
     function triggerUpdateDecorations() {
         if (timeout) {
             clearTimeout(timeout);
@@ -122,7 +122,11 @@ export function activate(context: vscode.ExtensionContext) {
         while (match = regEx.exec(text)) {
             const startPos = activeEditor.document.positionAt(match.index);
             const endPos = activeEditor.document.positionAt(match.index + match[0].length);
-            const decoration = { range: new vscode.Range(startPos, endPos), hoverMessage: 'Bad char "**' + match[0] + '**"' };
+            console.log(match[0]);
+            const decoration = {
+                range: new vscode.Range(startPos, endPos),
+                hoverMessage: 'Bad char "**' + match[0] + '**"',
+            };
             badChars.push(decoration);
         }
         activeEditor.setDecorations(badCharDecorationType, badChars);
