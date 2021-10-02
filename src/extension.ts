@@ -59,6 +59,7 @@ export function activate(context: vscode.ExtensionContext) {
         '\u205F', // medium mathematical space
         '\u3000', // ideographic space
         '\uFEFF', // zero width no-break space
+        '\u00AD', // soft hypen
 
         // others
         '\u037E', // greek question mark
