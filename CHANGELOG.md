@@ -1,9 +1,17 @@
 # Change Log
+
 All notable changes to the "highlight-bad-chars" extension will be documented in this file.
 
-## 0.0.4 - 2021-09-11
+## 0.x.x - 2021-xx-xx
 
-- [feat] remove redundant "Hello World" Command from Command Palette.
+- [feat] extension now works on VS Code for the Web (like github.dev)
+- [feat] highlight additional characters: control characters, soft hyphen, object replacement character - close #8, #9, #17
+- [feat] show the Unicode codepoint of highlighted characters - close #12
+- [feat] configuration option `asciiOnly` to highlight all non-ASCII characters as "bad" (disabled by default) - close #7
+- [fix] when the configuration changes, the extension changes its behavior without reloading the window
+- [fix] remove redundant "Hello World" Command from Command Palette - close #15
+
+Thanks to @ItalyPaleAle, @quackingduck, @Pablion.
 
 ## 0.0.3 - 2018-06-30
 
