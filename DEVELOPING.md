@@ -1,4 +1,4 @@
-# Welcome Developper
+# Welcome Developer
 
 * Issues should be filed at
 https://github.com/WengerK/vscode-highlight-bad-chars/issues
@@ -23,6 +23,6 @@ https://github.com/WengerK/vscode-highlight-bad-chars/pulls
 
 ## Publish
 
-* Push every commits on the master branch of the Github & Visualstudio plateform.
+* Push every commits on the master branch of GitHub.
 * Bump the versions into the CHANGELOG.md & the VERSION.md.
 * Publish on the Marketplace using the `vsce publish` command.
