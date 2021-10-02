@@ -6,11 +6,15 @@ import chars from './bad-characters';
 function loadConfiguration(): {
     badCharDecorationType: vscode.TextEditorDecorationType,
     charRegExp: string,
+    allowedChars: string[],
 } {
-    const badCharDecorationStyle = vscode.workspace.getConfiguration('highlight-bad-chars').badCharDecorationStyle as vscode.DecorationRenderOptions;
+    const configObj = vscode.workspace.getConfiguration('highlight-bad-chars');
+    const badCharDecorationStyle = configObj.badCharDecorationStyle as vscode.DecorationRenderOptions;
+    const additionalChars = configObj.additionalUnicodeChars as string[];
+    const asciiOnly = !!configObj.asciiOnly;
+    let allowedChars = configObj.allowedUnicodeChars as string[];
+
     const badCharDecorationType = vscode.window.createTextEditorDecorationType(badCharDecorationStyle);
-    const additionalChars = vscode.workspace.getConfiguration('highlight-bad-chars').additionalUnicodeChars as string[];
-    const asciiOnly = vscode.workspace.getConfiguration('highlight-bad-chars').asciiOnly;
 
     const charRegExp = '[' +
         chars.join('') +
@@ -18,9 +22,14 @@ function loadConfiguration(): {
         (asciiOnly ? '\u{0080}-\u{10FFFF}' : '') +
         ']';
 
+    if (!allowedChars || !allowedChars.length) {
+        allowedChars = [];
+    }
+
     return {
         badCharDecorationType,
         charRegExp,
+        allowedChars,
     };
 }
 
@@ -72,6 +81,9 @@ export function activate(context: vscode.ExtensionContext) {
         let match;
         // tslint:disable-next-line:no-conditional-assignment
         while (match = regEx.exec(text)) {
+            if (config.allowedChars.includes(match[0])) {
+                continue;
+            }
             const startPos = activeEditor.document.positionAt(match.index);
             const endPos = activeEditor.document.positionAt(match.index + match[0].length);
             const codePoint = match[0].codePointAt(0)?.toString(16).toUpperCase();

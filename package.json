@@ -28,7 +28,12 @@
                 "highlight-bad-chars.additionalUnicodeChars": {
                     "type": "array",
                     "default": [],
-                    "description": "array of additional unicode characters to match. example '\\u200E'"
+                    "description": "array of additional Unicode characters to match. example '\\u200E'"
+                },
+                "highlight-bad-chars.allowedUnicodeChars": {
+                    "type": "array",
+                    "default": [],
+                    "description": "array of allowed Unicode characters to allow (which will not be marked as \"bad\". example '\\u200E'"
                 },
                 "highlight-bad-chars.badCharDecorationStyle": {
                     "type": "object",
