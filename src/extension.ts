@@ -122,10 +122,10 @@ export function activate(context: vscode.ExtensionContext) {
         while (match = regEx.exec(text)) {
             const startPos = activeEditor.document.positionAt(match.index);
             const endPos = activeEditor.document.positionAt(match.index + match[0].length);
-            console.log(match[0]);
+            const codePoint = match[0].codePointAt(0)?.toString(16).toUpperCase();
             const decoration = {
                 range: new vscode.Range(startPos, endPos),
-                hoverMessage: 'Bad char "**' + match[0] + '**"',
+                hoverMessage: `Bad char \\u${codePoint} (${match[0]})`,
             };
             badChars.push(decoration);
         }
