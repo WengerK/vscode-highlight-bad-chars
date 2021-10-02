@@ -21,7 +21,6 @@
         "array-type": [true, "array-simple"],
         "triple-equals": false,
         "class-name": true,
-        "object-literal-shorthand": [true, "never"],
         "interface-name": [true, "never-prefix"],
         "jsdoc-format": true,
         "no-namespace": false,

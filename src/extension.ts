@@ -3,10 +3,10 @@
 import * as vscode from 'vscode';
 import chars from './bad-characters';
 
-// this method is called when vs code is activated
-export function activate(context: vscode.ExtensionContext) {
-    console.log('highlight-bad-chars decorator is activated');
-
+function loadConfiguration(): {
+    badCharDecorationType: vscode.TextEditorDecorationType,
+    charRegExp: string,
+} {
     const badCharDecorationStyle = vscode.workspace.getConfiguration('highlight-bad-chars').badCharDecorationStyle as vscode.DecorationRenderOptions;
     const badCharDecorationType = vscode.window.createTextEditorDecorationType(badCharDecorationStyle);
     const additionalChars = vscode.workspace.getConfiguration('highlight-bad-chars').additionalUnicodeChars as string[];
@@ -17,6 +17,17 @@ export function activate(context: vscode.ExtensionContext) {
         (additionalChars || []).join('') +
         (asciiOnly ? '\u{0080}-\u{10FFFF}' : '') +
         ']';
+
+    return {
+        badCharDecorationType,
+        charRegExp,
+    };
+}
+
+// this method is called when vs code is activated
+export function activate(context: vscode.ExtensionContext) {
+    let config = loadConfiguration();
+    console.log('highlight-bad-chars decorator is activated with configuration', config);
 
     let timeout: NodeJS.Timeout|null = null;
     let activeEditor = vscode.window.activeTextEditor;
@@ -37,6 +48,11 @@ export function activate(context: vscode.ExtensionContext) {
         }
     }, null, context.subscriptions);
 
+    vscode.workspace.onDidChangeConfiguration(event => {
+        config = loadConfiguration();
+        console.log('highlight-bad-chars configuration updated', config);
+    }, null, context.subscriptions);
+
     function triggerUpdateDecorations() {
         if (timeout) {
             clearTimeout(timeout);
@@ -49,7 +65,7 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        const regEx = new RegExp(charRegExp, 'g');
+        const regEx = new RegExp(config.charRegExp, 'g');
         const text = activeEditor.document.getText();
         const badChars: vscode.DecorationOptions[] = [];
 
@@ -65,6 +81,6 @@ export function activate(context: vscode.ExtensionContext) {
             };
             badChars.push(decoration);
         }
-        activeEditor.setDecorations(badCharDecorationType, badChars);
+        activeEditor.setDecorations(config.badCharDecorationType, badChars);
     }
 }
