@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to the "highlight-bad-chars" extension will be documented in this file.
 
+## 0.0.4 - 2021-09-11
+
+- [feat] remove redundant "Hello World" Command from Command Palette.
+
 ## 0.0.3 - 2018-06-30
 
 - [style] make badchar decoration style configurable - close #5 - by @adimascio
