@@ -47,11 +47,13 @@
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./"
+        "compile": "tsc -watch -p ./",
+        "lint": "tslint -c tslint.json 'src/**/*.ts'"
     },
     "devDependencies": {
         "@types/node": "^16.10.2",
         "@types/vscode": "^1.59.0",
-        "typescript": "^4.4.3"
+        "typescript": "^4.4.3",
+        "tslint": "^6.1.3"
     }
 }

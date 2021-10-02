@@ -1,4 +1,5 @@
 'use strict';
+
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
@@ -77,9 +78,9 @@ export function activate(context: vscode.ExtensionContext) {
         '\u01C0', // latin letter dental click
         '\u2223', // divides
     ];
-    
-    let additionalChars = vscode.workspace.getConfiguration('highlight-bad-chars').additionalUnicodeChars;
-    let charRegExp = '[' + chars.join('') + additionalChars.join('') + ']';
+
+    const additionalChars = vscode.workspace.getConfiguration('highlight-bad-chars').additionalUnicodeChars;
+    const charRegExp = '[' + chars.join('') + additionalChars.join('') + ']';
     let activeEditor = vscode.window.activeTextEditor;
     if (activeEditor) {
         triggerUpdateDecorations();
@@ -94,11 +95,11 @@ export function activate(context: vscode.ExtensionContext) {
 
     vscode.workspace.onDidChangeTextDocument(event => {
         if (activeEditor && event.document === activeEditor.document) {
-        triggerUpdateDecorations();
+            triggerUpdateDecorations();
         }
     }, null, context.subscriptions);
 
-    var timeout = null;
+    let timeout: NodeJS.Timeout|null = null;
     function triggerUpdateDecorations() {
         if (timeout) {
             clearTimeout(timeout);
@@ -111,11 +112,12 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        let regEx = new RegExp(charRegExp, 'g');
+        const regEx = new RegExp(charRegExp, 'g');
         const text = activeEditor.document.getText();
         const badChars: vscode.DecorationOptions[] = [];
 
         let match;
+        // tslint:disable-next-line:no-conditional-assignment
         while (match = regEx.exec(text)) {
             const startPos = activeEditor.document.positionAt(match.index);
             const endPos = activeEditor.document.positionAt(match.index + match[0].length);
