@@ -2,6 +2,10 @@
 
 All notable changes to the "highlight-bad-chars" extension will be documented in this file.
 
+# 0.0.5 - DATE
+
+- [fix] do not highlight horizontal tabs as "bad characters"
+
 ## 0.0.4 - 2021-04-10
 
 - [feat] extension now works on VS Code for the Web (like github.dev)
