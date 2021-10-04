@@ -2,7 +2,7 @@
 
 All notable changes to the "highlight-bad-chars" extension will be documented in this file.
 
-# 0.0.5 - DATE
+# 0.0.5 - 2021-04-10
 
 - [fix] do not highlight horizontal tabs as "bad characters"
 
