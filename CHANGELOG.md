@@ -2,7 +2,7 @@
 
 All notable changes to the "highlight-bad-chars" extension will be documented in this file.
 
-## 0.x.x - 2021-xx-xx
+## 0.0.4 - 2021-04-10
 
 - [feat] extension now works on VS Code for the Web (like github.dev)
 - [feat] highlight additional characters: control characters, soft hyphen, object replacement character - close #8, #9, #17
