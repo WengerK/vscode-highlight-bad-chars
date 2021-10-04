@@ -59,7 +59,6 @@ export default [
     `\x06`, // ACK
     `\x07`, // BEL
     `\x08`, // BS
-    `\x09`, // HT
     `\x0B`, // VT
     `\x0C`, // FF
     `\x0E`, // SO
