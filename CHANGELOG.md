@@ -7,6 +7,10 @@ All notable changes to the "highlight-bad-chars" extension will be documented in
 - [feat] add Github Actions running tests & styles
 - [feat] add Jest Snapshot testing
 
+# 0.0.5 - 2021-04-10
+
+- [fix] do not highlight horizontal tabs as "bad characters"
+
 ## 0.0.4 - 2021-04-10
 
 - [feat] extension now works on VS Code for the Web (like github.dev)
