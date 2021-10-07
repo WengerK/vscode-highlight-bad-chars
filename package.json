@@ -50,6 +50,11 @@
                     "type": "boolean",
                     "default": false,
                     "description": "if enabled, all non-ASCII characters are highlighted"
+                },
+                "highlight-bad-chars.severity": {
+                    "type": "number",
+                    "default": 0,
+                    "description": "severity of the problems reported. 0 for error, 1 for warning, 2 for information and 3 for info."
                 }
             }
         }

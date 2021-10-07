@@ -7,6 +7,7 @@ function loadConfiguration(): {
     badCharDecorationType: vscode.TextEditorDecorationType,
     charRegExp: string,
     allowedChars: string[],
+    errorSeverity: vscode.DiagnosticSeverity,
 } {
     const configObj = vscode.workspace.getConfiguration('highlight-bad-chars');
     const badCharDecorationStyle = configObj.badCharDecorationStyle as vscode.DecorationRenderOptions;
@@ -15,6 +16,25 @@ function loadConfiguration(): {
     let allowedChars = configObj.allowedUnicodeChars as string[];
 
     const badCharDecorationType = vscode.window.createTextEditorDecorationType(badCharDecorationStyle);
+
+    let errorSeverity: vscode.DiagnosticSeverity;
+    switch (configObj.severity) {
+        case 0:
+            errorSeverity = vscode.DiagnosticSeverity.Error;
+            break;
+        case 1:
+            errorSeverity = vscode.DiagnosticSeverity.Warning;
+            break;
+        case 2:
+            errorSeverity = vscode.DiagnosticSeverity.Information;
+            break;
+        case 3:
+            errorSeverity = vscode.DiagnosticSeverity.Hint;
+            break;
+        default:
+            errorSeverity = vscode.DiagnosticSeverity.Error;
+            break;
+    }
 
     const charRegExp = '[' +
         chars.join('') +
@@ -30,13 +50,14 @@ function loadConfiguration(): {
         badCharDecorationType,
         charRegExp,
         allowedChars,
+        errorSeverity,
     };
 }
 
 // this method is called when vs code is activated
 export function activate(context: vscode.ExtensionContext) {
     let config = loadConfiguration();
-    const diagnosticCollection = vscode.languages.createDiagnosticCollection(`bad-characters`);
+    const diagnosticCollection = vscode.languages.createDiagnosticCollection('highlight-bad-chars');
     console.log('highlight-bad-chars decorator is activated with configuration', config);
 
     let timeout: NodeJS.Timeout|null = null;
@@ -95,13 +116,18 @@ export function activate(context: vscode.ExtensionContext) {
                 hoverMessage: `Bad char \\u${codePoint} (${match[0]})`,
             };
             badChars.push(decoration);
-            errors.push(createDiagnostic(startPos, endPos));
+            errors.push(createDiagnostic(startPos, endPos, `found a bad character: \\u${codePoint}`, config.errorSeverity));
         }
         activeEditor.setDecorations(config.badCharDecorationType, badChars);
         diagnosticCollection.set(fileUri, errors);
     }
 
-    function createDiagnostic(start: vscode.Position, end: vscode.Position) {
-        return new vscode.Diagnostic(new vscode.Range(start, end), `Found an incorrect character`);
+    function createDiagnostic(
+        start: vscode.Position,
+        end: vscode.Position,
+        message: string,
+        severity: vscode.DiagnosticSeverity
+    ) {
+        return new vscode.Diagnostic(new vscode.Range(start, end), message, severity);
     }
 }
