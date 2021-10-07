@@ -84,6 +84,11 @@ export function activate(context: vscode.ExtensionContext) {
         console.log('highlight-bad-chars configuration updated', config);
     }, null, context.subscriptions);
 
+    vscode.workspace.onDidCloseTextDocument(event => {
+        diagnosticCollection.delete(event.uri);
+        triggerUpdateDecorations();
+    })
+
     function triggerUpdateDecorations() {
         if (timeout) {
             clearTimeout(timeout);
