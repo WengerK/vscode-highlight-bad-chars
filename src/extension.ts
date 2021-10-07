@@ -36,6 +36,7 @@ function loadConfiguration(): {
 // this method is called when vs code is activated
 export function activate(context: vscode.ExtensionContext) {
     let config = loadConfiguration();
+    const diagnosticCollection = vscode.languages.createDiagnosticCollection(`bad-characters`);
     console.log('highlight-bad-chars decorator is activated with configuration', config);
 
     let timeout: NodeJS.Timeout|null = null;
@@ -77,6 +78,8 @@ export function activate(context: vscode.ExtensionContext) {
         const regEx = new RegExp(config.charRegExp, 'g');
         const text = activeEditor.document.getText();
         const badChars: vscode.DecorationOptions[] = [];
+        const errors: vscode.Diagnostic[] = [];
+        const fileUri = activeEditor.document.uri;
 
         let match;
         // tslint:disable-next-line:no-conditional-assignment
@@ -92,7 +95,13 @@ export function activate(context: vscode.ExtensionContext) {
                 hoverMessage: `Bad char \\u${codePoint} (${match[0]})`,
             };
             badChars.push(decoration);
+            errors.push(createDiagnostic(startPos, endPos));
         }
         activeEditor.setDecorations(config.badCharDecorationType, badChars);
+        diagnosticCollection.set(fileUri, errors);
+    }
+
+    function createDiagnostic(start: vscode.Position, end: vscode.Position) {
+        return new vscode.Diagnostic(new vscode.Range(start, end), `Found an incorrect character`);
     }
 }
