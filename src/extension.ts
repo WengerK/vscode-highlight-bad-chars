@@ -133,6 +133,8 @@ export function activate(context: vscode.ExtensionContext) {
         message: string,
         severity: vscode.DiagnosticSeverity
     ) {
-        return new vscode.Diagnostic(new vscode.Range(start, end), message, severity);
+        const diagnostic = new vscode.Diagnostic(new vscode.Range(start, end), message, severity);
+        diagnostic.source = 'highlight-bad-chars';
+        return diagnostic;
     }
 }
