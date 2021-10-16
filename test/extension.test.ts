@@ -1,10 +1,18 @@
-import {contributes} from './package.json';
+import type {DecorationRenderOptions} from 'vscode';
+import {contributes} from '../package.json';
 const configDefinition = contributes.configuration;
 
+export type ExtensionConfig = {
+    badCharDecorationStyle: DecorationRenderOptions,
+    additionalUnicodeChars?: string[],
+    allowedUnicodeChars?: string[],
+    asciiOnly?: boolean,
+};
+
 /**
- * Create a Mock VSCode document.
+ * Create a Mock VS Code document.
  *
- * @param text   The text contained in the document.
+ * @param text The text contained in the document.
  */
 const createMockDocument = (text = '') => {
     return {
@@ -25,12 +33,14 @@ const createMockDocument = (text = '') => {
     };
 };
 
-let mockDocument = createMockDocument();
+const mockDocument = createMockDocument();
 
 /**
  * Mock the console to ignore console.log in tests.
  */
 global.console = {
+    ...global.console,
+
     // console.log are ignored in tests.
     log: jest.fn(),
 
@@ -41,15 +51,17 @@ global.console = {
     debug: console.debug,
 };
 
-let mockDisposable = {
+const mockDisposable = {
     dispose: jest.fn(),
 };
 
-let mockDecorationType = {
+const mockDecorationType = {
     dispose: jest.fn(),
 };
 
-let mockConfiguration = {};
+let mockConfiguration: ExtensionConfig = {
+    badCharDecorationStyle: contributes.configuration.properties['highlight-bad-chars.badCharDecorationStyle'].default,
+};
 const mockSetDecorations = jest.fn();
 
 /**
@@ -58,11 +70,11 @@ const mockSetDecorations = jest.fn();
  * Finds the indentation on the first line after the opening backtick
  * and removes that indentation from every line in the template.
  *
- * @param {String[]} strings    Array of lines in the template literal.
+ * @param strings Array of lines in the template literal.
  */
-function outdent(strings: any[]) {
+function outdent(strings: string[]|string) {
     // Add in all of the expressions.
-    let outdented = strings
+    let outdented = (Array.isArray(strings) ? strings : [strings])
         .map((s, i) => `${s}${arguments[i + 1] || ''}`)
         .join('');
 
@@ -106,7 +118,7 @@ jest.mock(
 // tslint:disable-next-line:no-var-requires
 const mockVscode = require('vscode');
 // tslint:disable-next-line:no-var-requires
-const { activate } = require('./src/extension');
+const {activate} = require('../src/extension');
 const context = {};
 
 beforeEach(() => {
@@ -184,40 +196,40 @@ describe('updateDecorations', () => {
     });
 
     it('shows multiple characters on multiple lines', () => {
-        mockDocument.text = outdent`
+        mockDocument.text = outdent(`
     zero width space \u200b\u200b\u200b
     zero width non-joiner \u200c\u200c\u200c
     paragraph separator \u2029\u2029\u2029
     non breaking space \u00a0\u00a0\u00a0
     left double quotation mark \u201c\u201c\u201c
     right double quotation mark \u201d\u201d\u201d
-    `;
+    `);
         activate(context);
         jest.runAllTimers();
         expect(mockSetDecorations.mock.calls).toMatchSnapshot();
     });
 
     it('clears decorations with a clean document', () => {
-        mockDocument.text = outdent`
+        mockDocument.text = outdent(`
     zero width space \u200b\u200b\u200b
     zero width non-joiner \u200c\u200c\u200c
     paragraph separator \u2029\u2029\u2029
     non breaking space \u00a0\u00a0\u00a0
     left double quotation mark \u201c\u201c\u201c
     right double quotation mark \u201d\u201d\u201d
-    `;
+    `);
         activate(context);
         jest.runAllTimers();
         mockSetDecorations.mockClear();
 
-        mockDocument.text = outdent`
+        mockDocument.text = outdent(`
     zero width space
     zero width non-joiner
     paragraph separator
     non breaking space
     left double quotation mark
     right double quotation mark
-    `;
+    `);
         activate(context);
         jest.runAllTimers();
         expect(mockSetDecorations.mock.calls).toMatchSnapshot();
@@ -258,6 +270,9 @@ describe('configuration', () => {
 
             // When overriding level to allow that char.
             mockSetDecorations.mockClear();
+            if (!mockConfiguration.allowedUnicodeChars) {
+                mockConfiguration.allowedUnicodeChars = [];
+            }
             mockConfiguration.allowedUnicodeChars.push('200b');
             const configChangeHandler = mockVscode.workspace.onDidChangeConfiguration.mock.calls[0][0];
             configChangeHandler({ affectsConfiguration: () => true});

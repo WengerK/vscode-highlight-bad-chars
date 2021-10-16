@@ -55,14 +55,17 @@
         }
     },
     "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
-        "lint": "tslint -c tslint.json 'src/**/*.ts' 'extension.test.ts' --fix",
+        "vscode:prepublish": "npm run compile && npm run test && npm run lint",
+        "build": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts'",
         "test": "jest"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.15.6",
         "@babel/preset-typescript": "^7.15.0",
+        "@types/jest": "^27.0.2",
         "@types/node": "^16.10.2",
         "@types/vscode": "^1.60.0",
         "jest": "^27.2.4",

@@ -1,5 +1,122 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`configuration level setting level to none prevents decoration from being displayed 1`] = `
+Array [
+  Array [
+    Object {
+      "dispose": [MockFunction],
+    },
+    Array [
+      Object {
+        "hoverMessage": "Bad char \\\\u200B (​)",
+        "range": Object {
+          "left": Object {
+            "character": 17,
+            "line": 0,
+          },
+          "right": Object {
+            "character": 18,
+            "line": 0,
+          },
+        },
+      },
+    ],
+  ],
+  Array [
+    Object {
+      "dispose": [MockFunction],
+    },
+    Array [
+      Object {
+        "hoverMessage": "Bad char \\\\u200B (​)",
+        "range": Object {
+          "left": Object {
+            "character": 17,
+            "line": 0,
+          },
+          "right": Object {
+            "character": 18,
+            "line": 0,
+          },
+        },
+      },
+    ],
+  ],
+  Array [
+    Object {
+      "dispose": [MockFunction],
+    },
+    Array [
+      Object {
+        "hoverMessage": "Bad char \\\\u200B (​)",
+        "range": Object {
+          "left": Object {
+            "character": 17,
+            "line": 0,
+          },
+          "right": Object {
+            "character": 18,
+            "line": 0,
+          },
+        },
+      },
+    ],
+  ],
+  Array [
+    Object {
+      "dispose": [MockFunction],
+    },
+    Array [
+      Object {
+        "hoverMessage": "Bad char \\\\u200B (​)",
+        "range": Object {
+          "left": Object {
+            "character": 17,
+            "line": 0,
+          },
+          "right": Object {
+            "character": 18,
+            "line": 0,
+          },
+        },
+      },
+    ],
+  ],
+]
+`;
+
+exports[`configuration level setting level to none prevents decoration from being displayed 2`] = `Array []`;
+
+exports[`lifecycle registration registers with window.onDidChangeActiveTextEditor 1`] = `
+Array [
+  Array [
+    [Function],
+    null,
+    undefined,
+  ],
+]
+`;
+
+exports[`lifecycle registration registers with workspace.onDidChangeConfiguration 1`] = `
+Array [
+  Array [
+    [Function],
+    null,
+    undefined,
+  ],
+]
+`;
+
+exports[`lifecycle registration registers with workspace.onDidChangeTextDocument 1`] = `
+Array [
+  Array [
+    [Function],
+    null,
+    undefined,
+  ],
+]
+`;
+
 exports[`updateDecorations clears decorations with a clean document 1`] = `
 Array [
   Array [
