@@ -4,8 +4,10 @@ All notable changes to the "highlight-bad-chars" extension will be documented in
 
 ## Unreleased
 
+- [feat] bundle extension with Webpack for better support for unpkg and browser extension host; the extension always runs in the web extension host now
 - [feat] add Github Actions running tests & styles
 - [feat] add Jest Snapshot testing
+- [feat] change extension activation to `onStartupFinished` to avoid slowing down VS Code launch
 
 # 0.0.5 - 2021-04-10
 
