@@ -3,19 +3,23 @@
 import * as vscode from 'vscode';
 import chars from './bad-characters';
 
+export type ExtensionConfig = {
+    badCharDecorationStyle: vscode.DecorationRenderOptions,
+    additionalUnicodeChars?: string[],
+    allowedUnicodeChars?: string[],
+    asciiOnly?: boolean,
+};
+
 function loadConfiguration(): {
     badCharDecorationType: vscode.TextEditorDecorationType,
     charRegExp: string,
     allowedChars: string[],
     errorSeverity: vscode.DiagnosticSeverity,
 } {
-    const configObj = vscode.workspace.getConfiguration('highlight-bad-chars');
-    const badCharDecorationStyle = configObj.badCharDecorationStyle as vscode.DecorationRenderOptions;
-    const additionalChars = configObj.additionalUnicodeChars as string[];
-    const asciiOnly = !!configObj.asciiOnly;
-    let allowedChars = configObj.allowedUnicodeChars as string[];
+    const configObj = (vscode.workspace.getConfiguration('highlight-bad-chars')) as vscode.WorkspaceConfiguration & ExtensionConfig;
+    let allowedChars = configObj.allowedUnicodeChars;
 
-    const badCharDecorationType = vscode.window.createTextEditorDecorationType(badCharDecorationStyle);
+    const badCharDecorationType = vscode.window.createTextEditorDecorationType(configObj.badCharDecorationStyle);
 
     let errorSeverity: vscode.DiagnosticSeverity;
     switch (configObj.severity) {
@@ -38,8 +42,8 @@ function loadConfiguration(): {
 
     const charRegExp = '[' +
         chars.join('') +
-        (additionalChars || []).join('') +
-        (asciiOnly ? '\u{0080}-\u{10FFFF}' : '') +
+        (configObj.additionalUnicodeChars || []).join('') +
+        (configObj.asciiOnly ? '\u{0080}-\u{10FFFF}' : '') +
         ']';
 
     if (!allowedChars || !allowedChars.length) {
@@ -79,7 +83,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
     }, null, context.subscriptions);
 
-    vscode.workspace.onDidChangeConfiguration(event => {
+    vscode.workspace.onDidChangeConfiguration(_ => {
         config = loadConfiguration();
         console.log('highlight-bad-chars configuration updated', config);
     }, null, context.subscriptions);

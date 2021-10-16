@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "resolveJsonModule": true,
+        "module": "commonjs",
+        "target": "ES2018",
+        "types": [
+            "vscode",
+            "node",
+            "jest"
+        ]
+    }
+}

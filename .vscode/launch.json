@@ -11,8 +11,8 @@
             ],
             "stopOnEntry": false,
             "sourceMaps": true,
-            "outFiles": ["${workspaceRoot}/out/src/**/*.js"],
-            "preLaunchTask": "npm"
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+            "preLaunchTask": "npm: watch-web"
         },
         {
             "name": "Launch Web Extension",
@@ -24,8 +24,8 @@
                 "--extensionDevelopmentKind=web"
             ],
             "sourceMaps": true,
-            "outFiles": ["${workspaceRoot}/out/src/**/*.js"],
-            "preLaunchTask": "npm"
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
+            "preLaunchTask": "npm: watch-web"
           }
     ]
 }

@@ -47,7 +47,6 @@ export default [
     '\u3000', // ideographic space
     '\uFEFF', // zero width no-break space
     '\uFFFC', // object replacement character
-    '\u00AD', // soft hyphen
 
     // control characters
     `\x00`, // NUL
@@ -86,4 +85,5 @@ export default [
     '\u00B8', // cadilla
     '\u01C0', // latin letter dental click
     '\u2223', // divides
+    '\u00AD', // soft hyphen
 ];
