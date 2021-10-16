@@ -1,3 +1,7 @@
+out
+dist
+.vscode-test-web/
+*.vsix
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,macos,linux,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,visualstudiocode,macos,linux,windows

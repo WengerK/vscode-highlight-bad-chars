@@ -61,7 +61,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
     }, null, context.subscriptions);
 
-    vscode.workspace.onDidChangeConfiguration(event => {
+    vscode.workspace.onDidChangeConfiguration(_ => {
         config = loadConfiguration();
         console.log('highlight-bad-chars configuration updated', config);
     }, null, context.subscriptions);

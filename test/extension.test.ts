@@ -102,7 +102,7 @@ jest.mock(
             workspace: {
                 onDidChangeTextDocument: jest.fn(() => mockDisposable),
                 onDidChangeConfiguration: jest.fn(() => mockDisposable),
-                getConfiguration: jest.fn((key) => mockConfiguration),
+                getConfiguration: jest.fn(_ => mockConfiguration),
             },
             Position: jest.fn((line, char) => {
                 return { line, char };
