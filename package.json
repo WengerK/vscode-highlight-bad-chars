@@ -55,6 +55,7 @@
     },
     "scripts": {
         "build": "npm run compile-web",
+        "compile": "npm run build",
         "clean": "rimraf dist/*",
         "watch": "npm run watch-web",
         "pretest": "npm run compile-web",
