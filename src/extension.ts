@@ -125,7 +125,14 @@ export function activate(context: vscode.ExtensionContext) {
                 hoverMessage: `Bad char \\u${codePoint} (${match[0]})`,
             };
             badChars.push(decoration);
-            errors.push(createDiagnostic(startPos, endPos, `found a bad character: \\u${codePoint}`, config.errorSeverity));
+            errors.push(
+                createDiagnostic(
+                    startPos,
+                    endPos,
+                    `found a bad character: \\u${codePoint} (${match[0]})`,
+                    config.errorSeverity
+                )
+            );
         }
         activeEditor.setDecorations(config.badCharDecorationType, badChars);
         diagnosticCollection.set(fileUri, errors);
