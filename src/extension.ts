@@ -8,6 +8,7 @@ export type ExtensionConfig = {
     additionalUnicodeChars?: string[],
     allowedUnicodeChars?: string[],
     asciiOnly?: boolean,
+    severity?: number,
 };
 
 function loadConfiguration(): {
@@ -91,7 +92,7 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.workspace.onDidCloseTextDocument(event => {
         diagnosticCollection.delete(event.uri);
         triggerUpdateDecorations();
-    })
+    }, null, context.subscriptions);
 
     function triggerUpdateDecorations() {
         if (timeout) {
@@ -130,8 +131,8 @@ export function activate(context: vscode.ExtensionContext) {
                     startPos,
                     endPos,
                     `found a bad character: \\u${codePoint} (${match[0]})`,
-                    config.errorSeverity
-                )
+                    config.errorSeverity,
+                ),
             );
         }
         activeEditor.setDecorations(config.badCharDecorationType, badChars);
@@ -142,7 +143,7 @@ export function activate(context: vscode.ExtensionContext) {
         start: vscode.Position,
         end: vscode.Position,
         message: string,
-        severity: vscode.DiagnosticSeverity
+        severity: vscode.DiagnosticSeverity,
     ) {
         const diagnostic = new vscode.Diagnostic(new vscode.Range(start, end), message, severity);
         diagnostic.source = 'highlight-bad-chars';
