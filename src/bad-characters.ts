@@ -80,12 +80,9 @@ export default [
     `\x1F`, // US
     `\x7F`, // DEL
 
-    // others
-    '\u037E', // greek question mark
-    '\u00B8', // cadilla
-    '\u01C0', // latin letter dental click
-    '\u2223', // divides
-    '\u00AD', // soft hyphen
+    // Dangerous characters per Trojan Sources
+    // https://trojansource.codes
+    // Contains additional characters listed on https://access.redhat.com/security/vulnerabilities/RHSB-2021-007
     '\u061C',
     '\u200E',
     '\u200F',
@@ -100,4 +97,11 @@ export default [
     '\u2069',
     '\u200B',
     '\u200C',
+
+    // others
+    '\u037E', // greek question mark
+    '\u00B8', // cadilla
+    '\u01C0', // latin letter dental click
+    '\u2223', // divides
+    '\u00AD', // soft hyphen
 ];
