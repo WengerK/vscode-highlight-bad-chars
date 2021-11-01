@@ -64,7 +64,6 @@ export default [
     '\u2068',
     '\u2069',
     '\u200B',
-    '\u200C',
 
     // control characters
     `\x00`, // NUL
