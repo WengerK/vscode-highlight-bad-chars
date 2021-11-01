@@ -4,6 +4,7 @@ All notable changes to the "highlight-bad-chars" extension will be documented in
 
 ## Unreleased
 
+- [feat] highlight dangerous characters that could be exploited per [Trojan Source](https://trojansource.codes/) (CVE-2021-42574)
 - [feat] bundle extension with Webpack for better support for unpkg and browser extension host; the extension always runs in the web extension host now
 - [feat] add Github Actions running tests & styles
 - [feat] add Jest Snapshot testing
