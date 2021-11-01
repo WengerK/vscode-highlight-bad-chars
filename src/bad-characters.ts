@@ -80,6 +80,23 @@ export default [
     `\x1F`, // US
     `\x7F`, // DEL
 
+    // Dangerous characters per Trojan Sources
+    // https://trojansource.codes
+    // Contains additional characters listed on https://access.redhat.com/security/vulnerabilities/RHSB-2021-007
+    '\u061C',
+    '\u200E',
+    '\u200F',
+    '\u202A',
+    '\u202B',
+    '\u202C',
+    '\u202D',
+    '\u202E',
+    '\u2066',
+    '\u2067',
+    '\u2068',
+    '\u2069',
+    '\u200B',
+
     // others
     '\u037E', // greek question mark
     '\u00B8', // cadilla
