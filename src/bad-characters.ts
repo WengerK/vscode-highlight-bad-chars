@@ -96,7 +96,6 @@ export default [
     '\u2068',
     '\u2069',
     '\u200B',
-    '\u200C',
 
     // others
     '\u037E', // greek question mark
