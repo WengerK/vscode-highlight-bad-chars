@@ -48,6 +48,19 @@ export default [
     '\uFEFF', // zero width no-break space
     '\uFFFC', // object replacement character
 
+    // Dangerous characters per CVE-2021-42574
+    // https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-42574
+    // More details: https://www.openwall.com/lists/oss-security/2021/11/01/1
+    '\u202A',
+    '\u202B',
+    '\u202D',
+    '\u202E',
+    '\u2066',
+    '\u2067',
+    '\u2068',
+    '\u202C',
+    '\u2069',
+
     // control characters
     `\x00`, // NUL
     `\x01`, // SOH
