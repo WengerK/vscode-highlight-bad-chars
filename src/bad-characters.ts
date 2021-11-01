@@ -48,18 +48,23 @@ export default [
     '\uFEFF', // zero width no-break space
     '\uFFFC', // object replacement character
 
-    // Dangerous characters per CVE-2021-42574
-    // https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-42574
-    // More details: https://www.openwall.com/lists/oss-security/2021/11/01/1
+    // Dangerous characters per Trojan Sources
+    // https://trojansource.codes
+    // Contains additional characters listed on https://access.redhat.com/security/vulnerabilities/RHSB-2021-007
+    '\u061C',
+    '\u200E',
+    '\u200F',
     '\u202A',
     '\u202B',
+    '\u202C',
     '\u202D',
     '\u202E',
     '\u2066',
     '\u2067',
     '\u2068',
-    '\u202C',
     '\u2069',
+    '\u200B',
+    '\u200C',
 
     // control characters
     `\x00`, // NUL
