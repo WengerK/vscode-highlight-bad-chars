@@ -9,6 +9,7 @@ All notable changes to the "highlight-bad-chars" extension will be documented in
 - [feat] add Github Actions running tests & styles
 - [feat] add Jest Snapshot testing
 - [feat] change extension activation to `onStartupFinished` to avoid slowing down VS Code launch
+- [feat] update engines.vscode ^1.59.0 => ^1.60.0
 
 # 0.0.5 - 2021-04-10
 
