@@ -53,7 +53,7 @@
                 "highlight-bad-chars.severity": {
                     "type": "number",
                     "default": 1,
-                    "description": "severity of the problems reported. 0 for error, 1 for warning, 2 for information and 3 for info."
+                    "description": "severity of the problems reported. 0 for error, 1 for warning, 2 for information and 3 for hint."
                 }
             }
         }
