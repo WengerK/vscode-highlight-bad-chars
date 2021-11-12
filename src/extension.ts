@@ -8,17 +8,38 @@ export type ExtensionConfig = {
     additionalUnicodeChars?: string[],
     allowedUnicodeChars?: string[],
     asciiOnly?: boolean,
+    severity?: number,
 };
 
 function loadConfiguration(): {
     badCharDecorationType: vscode.TextEditorDecorationType,
     charRegExp: string,
     allowedChars: string[],
+    errorSeverity: vscode.DiagnosticSeverity,
 } {
     const configObj = (vscode.workspace.getConfiguration('highlight-bad-chars')) as vscode.WorkspaceConfiguration & ExtensionConfig;
     let allowedChars = configObj.allowedUnicodeChars;
 
     const badCharDecorationType = vscode.window.createTextEditorDecorationType(configObj.badCharDecorationStyle);
+
+    let errorSeverity: vscode.DiagnosticSeverity;
+    switch (configObj.severity) {
+        case 0:
+            errorSeverity = vscode.DiagnosticSeverity.Error;
+            break;
+        case 1:
+            errorSeverity = vscode.DiagnosticSeverity.Warning;
+            break;
+        case 2:
+            errorSeverity = vscode.DiagnosticSeverity.Information;
+            break;
+        case 3:
+            errorSeverity = vscode.DiagnosticSeverity.Hint;
+            break;
+        default:
+            errorSeverity = vscode.DiagnosticSeverity.Error;
+            break;
+    }
 
     const charRegExp = '[' +
         chars.join('') +
@@ -34,12 +55,14 @@ function loadConfiguration(): {
         badCharDecorationType,
         charRegExp,
         allowedChars,
+        errorSeverity,
     };
 }
 
 // this method is called when vs code is activated
 export function activate(context: vscode.ExtensionContext) {
     let config = loadConfiguration();
+    const diagnosticCollection = vscode.languages.createDiagnosticCollection('highlight-bad-chars');
     console.log('highlight-bad-chars decorator is activated with configuration', config);
 
     let timeout: NodeJS.Timeout|null = null;
@@ -66,6 +89,11 @@ export function activate(context: vscode.ExtensionContext) {
         console.log('highlight-bad-chars configuration updated', config);
     }, null, context.subscriptions);
 
+    vscode.workspace.onDidCloseTextDocument(event => {
+        diagnosticCollection.delete(event.uri);
+        triggerUpdateDecorations();
+    }, null, context.subscriptions);
+
     function triggerUpdateDecorations() {
         if (timeout) {
             clearTimeout(timeout);
@@ -81,6 +109,8 @@ export function activate(context: vscode.ExtensionContext) {
         const regEx = new RegExp(config.charRegExp, 'g');
         const text = activeEditor.document.getText();
         const badChars: vscode.DecorationOptions[] = [];
+        const errors: vscode.Diagnostic[] = [];
+        const fileUri = activeEditor.document.uri;
 
         let match;
         // tslint:disable-next-line:no-conditional-assignment
@@ -96,7 +126,27 @@ export function activate(context: vscode.ExtensionContext) {
                 hoverMessage: `Bad char \\u${codePoint} (${match[0]})`,
             };
             badChars.push(decoration);
+            errors.push(
+                createDiagnostic(
+                    startPos,
+                    endPos,
+                    `found a bad character: \\u${codePoint} (${match[0]})`,
+                    config.errorSeverity,
+                ),
+            );
         }
         activeEditor.setDecorations(config.badCharDecorationType, badChars);
+        diagnosticCollection.set(fileUri, errors);
+    }
+
+    function createDiagnostic(
+        start: vscode.Position,
+        end: vscode.Position,
+        message: string,
+        severity: vscode.DiagnosticSeverity,
+    ) {
+        const diagnostic = new vscode.Diagnostic(new vscode.Range(start, end), message, severity);
+        diagnostic.source = 'highlight-bad-chars';
+        return diagnostic;
     }
 }

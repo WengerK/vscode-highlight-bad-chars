@@ -22,13 +22,18 @@ Array [
       },
     ],
   ],
+]
+`;
+
+exports[`configuration level setting level to none prevents decoration from being displayed 2`] = `Array []`;
+
+exports[`configuration level setting level to none prevents diagnostic from being displayed 1`] = `
+Array [
   Array [
-    Object {
-      "dispose": [MockFunction],
-    },
+    undefined,
     Array [
       Object {
-        "hoverMessage": "Bad char \\\\u200B (​)",
+        "message": "found a bad character: \\\\u200B (​)",
         "range": Object {
           "left": Object {
             "character": 17,
@@ -39,53 +44,38 @@ Array [
             "line": 0,
           },
         },
-      },
-    ],
-  ],
-  Array [
-    Object {
-      "dispose": [MockFunction],
-    },
-    Array [
-      Object {
-        "hoverMessage": "Bad char \\\\u200B (​)",
-        "range": Object {
-          "left": Object {
-            "character": 17,
-            "line": 0,
-          },
-          "right": Object {
-            "character": 18,
-            "line": 0,
-          },
-        },
-      },
-    ],
-  ],
-  Array [
-    Object {
-      "dispose": [MockFunction],
-    },
-    Array [
-      Object {
-        "hoverMessage": "Bad char \\\\u200B (​)",
-        "range": Object {
-          "left": Object {
-            "character": 17,
-            "line": 0,
-          },
-          "right": Object {
-            "character": 18,
-            "line": 0,
-          },
-        },
+        "severity": "DiagnosticSeverity.Warning",
+        "source": "highlight-bad-chars",
       },
     ],
   ],
 ]
 `;
 
-exports[`configuration level setting level to none prevents decoration from being displayed 2`] = `Array []`;
+exports[`configuration level setting level to none prevents diagnostic from being displayed 2`] = `
+Array [
+  Array [
+    undefined,
+    Array [
+      Object {
+        "message": "found a bad character: \\\\u200B (​)",
+        "range": Object {
+          "left": Object {
+            "character": 17,
+            "line": 0,
+          },
+          "right": Object {
+            "character": 18,
+            "line": 0,
+          },
+        },
+        "severity": "DiagnosticSeverity.Warning",
+        "source": "highlight-bad-chars",
+      },
+    ],
+  ],
+]
+`;
 
 exports[`lifecycle registration registers with window.onDidChangeActiveTextEditor 1`] = `
 Array [
@@ -117,6 +107,16 @@ Array [
 ]
 `;
 
+exports[`lifecycle registration registers with workspace.onDidCloseTextDocument 1`] = `
+Array [
+  Array [
+    [Function],
+    null,
+    undefined,
+  ],
+]
+`;
+
 exports[`updateDecorations clears decorations with a clean document 1`] = `
 Array [
   Array [
@@ -128,12 +128,30 @@ Array [
 ]
 `;
 
+exports[`updateDecorations clears problems with a clean document 1`] = `
+Array [
+  Array [
+    undefined,
+    Array [],
+  ],
+]
+`;
+
 exports[`updateDecorations does not shows left double quotation mark 1`] = `
 Array [
   Array [
     Object {
       "dispose": [MockFunction],
     },
+    Array [],
+  ],
+]
+`;
+
+exports[`updateDecorations does not shows left double quotation mark in problems 1`] = `
+Array [
+  Array [
+    undefined,
     Array [],
   ],
 ]
@@ -156,6 +174,15 @@ Array [
     Object {
       "dispose": [MockFunction],
     },
+    Array [],
+  ],
+]
+`;
+
+exports[`updateDecorations does not shows right double quotation mark in problems 1`] = `
+Array [
+  Array [
+    undefined,
     Array [],
   ],
 ]
@@ -262,6 +289,106 @@ Array [
 ]
 `;
 
+exports[`updateDecorations shows multiple characters on multiple lines in problems 1`] = `
+Array [
+  Array [
+    undefined,
+    Array [
+      Object {
+        "message": "found a bad character: \\\\u200B (​)",
+        "range": Object {
+          "left": Object {
+            "character": 18,
+            "line": 1,
+          },
+          "right": Object {
+            "character": 19,
+            "line": 1,
+          },
+        },
+        "severity": "DiagnosticSeverity.Warning",
+        "source": "highlight-bad-chars",
+      },
+      Object {
+        "message": "found a bad character: \\\\u200B (​)",
+        "range": Object {
+          "left": Object {
+            "character": 19,
+            "line": 1,
+          },
+          "right": Object {
+            "character": 20,
+            "line": 1,
+          },
+        },
+        "severity": "DiagnosticSeverity.Warning",
+        "source": "highlight-bad-chars",
+      },
+      Object {
+        "message": "found a bad character: \\\\u200B (​)",
+        "range": Object {
+          "left": Object {
+            "character": 20,
+            "line": 1,
+          },
+          "right": Object {
+            "character": 21,
+            "line": 1,
+          },
+        },
+        "severity": "DiagnosticSeverity.Warning",
+        "source": "highlight-bad-chars",
+      },
+      Object {
+        "message": "found a bad character: \\\\uA0 ( )",
+        "range": Object {
+          "left": Object {
+            "character": 20,
+            "line": 4,
+          },
+          "right": Object {
+            "character": 21,
+            "line": 4,
+          },
+        },
+        "severity": "DiagnosticSeverity.Warning",
+        "source": "highlight-bad-chars",
+      },
+      Object {
+        "message": "found a bad character: \\\\uA0 ( )",
+        "range": Object {
+          "left": Object {
+            "character": 21,
+            "line": 4,
+          },
+          "right": Object {
+            "character": 22,
+            "line": 4,
+          },
+        },
+        "severity": "DiagnosticSeverity.Warning",
+        "source": "highlight-bad-chars",
+      },
+      Object {
+        "message": "found a bad character: \\\\uA0 ( )",
+        "range": Object {
+          "left": Object {
+            "character": 22,
+            "line": 4,
+          },
+          "right": Object {
+            "character": 23,
+            "line": 4,
+          },
+        },
+        "severity": "DiagnosticSeverity.Warning",
+        "source": "highlight-bad-chars",
+      },
+    ],
+  ],
+]
+`;
+
 exports[`updateDecorations shows non breaking space 1`] = `
 Array [
   Array [
@@ -281,6 +408,31 @@ Array [
             "line": 0,
           },
         },
+      },
+    ],
+  ],
+]
+`;
+
+exports[`updateDecorations shows non breaking space in problems 1`] = `
+Array [
+  Array [
+    undefined,
+    Array [
+      Object {
+        "message": "found a bad character: \\\\uA0 ( )",
+        "range": Object {
+          "left": Object {
+            "character": 19,
+            "line": 0,
+          },
+          "right": Object {
+            "character": 20,
+            "line": 0,
+          },
+        },
+        "severity": "DiagnosticSeverity.Warning",
+        "source": "highlight-bad-chars",
       },
     ],
   ],
@@ -312,6 +464,40 @@ Array [
 ]
 `;
 
+exports[`updateDecorations shows object replacement character in problems 1`] = `
+Array [
+  Array [
+    undefined,
+    Array [
+      Object {
+        "message": "found a bad character: \\\\uFFFC (￼)",
+        "range": Object {
+          "left": Object {
+            "character": 29,
+            "line": 0,
+          },
+          "right": Object {
+            "character": 30,
+            "line": 0,
+          },
+        },
+        "severity": "DiagnosticSeverity.Warning",
+        "source": "highlight-bad-chars",
+      },
+    ],
+  ],
+]
+`;
+
+exports[`updateDecorations shows paragraph separator in problems 1`] = `
+Array [
+  Array [
+    undefined,
+    Array [],
+  ],
+]
+`;
+
 exports[`updateDecorations shows soft hyphen 1`] = `
 Array [
   Array [
@@ -337,6 +523,40 @@ Array [
 ]
 `;
 
+exports[`updateDecorations shows soft hyphen in problems 1`] = `
+Array [
+  Array [
+    undefined,
+    Array [
+      Object {
+        "message": "found a bad character: \\\\uAD (­)",
+        "range": Object {
+          "left": Object {
+            "character": 12,
+            "line": 0,
+          },
+          "right": Object {
+            "character": 13,
+            "line": 0,
+          },
+        },
+        "severity": "DiagnosticSeverity.Warning",
+        "source": "highlight-bad-chars",
+      },
+    ],
+  ],
+]
+`;
+
+exports[`updateDecorations shows zero width non-joiner in problems 1`] = `
+Array [
+  Array [
+    undefined,
+    Array [],
+  ],
+]
+`;
+
 exports[`updateDecorations shows zero width space 1`] = `
 Array [
   Array [
@@ -356,6 +576,31 @@ Array [
             "line": 0,
           },
         },
+      },
+    ],
+  ],
+]
+`;
+
+exports[`updateDecorations shows zero width space in problems 1`] = `
+Array [
+  Array [
+    undefined,
+    Array [
+      Object {
+        "message": "found a bad character: \\\\u200B (​)",
+        "range": Object {
+          "left": Object {
+            "character": 17,
+            "line": 0,
+          },
+          "right": Object {
+            "character": 18,
+            "line": 0,
+          },
+        },
+        "severity": "DiagnosticSeverity.Warning",
+        "source": "highlight-bad-chars",
       },
     ],
   ],

@@ -4,6 +4,7 @@ All notable changes to the "highlight-bad-chars" extension will be documented in
 
 ## Unreleased
 
+- [feat] add bad characters to the problems pane
 # 0.0.6 - 2021-02-11
 
 - [feat] highlight dangerous characters that could be exploited per [Trojan Source](https://trojansource.codes/) (CVE-2021-42574)

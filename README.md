@@ -19,7 +19,7 @@ Save yourself the burden of debugging invisible bugs for hours!
 ### Settings
 
 Additional unicode characters can be specified in Visual Studio Code 'Settings'.
-'highlight-bad-chars.additionalUnicodeChars' is the setting name array object that is used. To add additional unicode characters, add a new string array value with the unicode character to mark as shown in example below.
+`highlight-bad-chars.additionalUnicodeChars` is the setting name array object that is used. To add additional unicode characters, add a new string array value with the unicode character to mark as shown in example below.
 
 ```json
     "highlight-bad-chars.additionalUnicodeChars": [
@@ -44,6 +44,10 @@ The default "bad char" decoration style can be configured through the
 ```
 
 ![highlight-bad-chars-configuration](https://raw.githubusercontent.com/WengerK/vscode-highlight-bad-chars/master/images/highlight-bad-chars-decoration.settings.png)
+
+The bad characters are also reported in the problem pane. By default, the severity is set to 'warning' (`1`) and you can configure it using `highlight-bad-chars.severity`. You can use 0 for error, 1 for warning, 2 for information and 3 for hint.
+
+![highlight-bad-chars-configuration](https://raw.githubusercontent.com/WengerK/vscode-highlight-bad-chars/master/images/highlight-bad-chars-problems.settings.png)
 
 ## Credits
 
